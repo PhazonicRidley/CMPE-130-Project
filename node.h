@@ -13,7 +13,7 @@ struct Node
 
   /// @brief Used to store all nodes at any given time, each is mapped to a
   /// letter
-  static std::unordered_map<char, std::shared_ptr<Node>> all_nodes;
+  inline static std::unordered_map<char, std::shared_ptr<Node>> all_nodes;
 
   /// @brief the label of a node (eg node A, B what ever)
   char label;
@@ -27,7 +27,7 @@ struct Node
     auto new_node = std::make_shared<Node>(Node(p_label));
     new_node->label = p_label;
     all_nodes[p_label] = new_node;
-    return nullptr;
+    return new_node;
   }
 
   /// @brief Adds an edge to the node. (Edges are represented as two directional
@@ -43,8 +43,7 @@ struct Node
   /// @param dest The node to remove from
   void remove_edge(char dest);
 
-  /// @brief DO NOT USE, USE THE CREATE STATIC METHOD, THIS IS SUPPOSED TO BE
-  /// PRIVATE BUT GCC IS BEING CRINGE AND IM LAZY!
+private:
   Node() = delete;
   Node(char p_label)
     : label(p_label){};
